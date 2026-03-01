@@ -8,6 +8,7 @@ const EducationForm = () => {
   const addEducation = () => {
     updateEducation([
       ...education,
+      // eslint-disable-next-line react-hooks/purity
       { id: Date.now().toString(), degree: '', institution: '', location: '', graduationDate: '', gpa: '', coursework: '' },
     ]);
   };

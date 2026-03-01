@@ -20,12 +20,12 @@ const ModernTemplate = ({ cvData, colorTheme }) => {
           </p>
         )}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', fontSize: '10px', color: '#555', borderTop: `2px solid ${colorTheme}`, paddingTop: '8px' }}>
-          {personalInfo?.email && <span>📧 {personalInfo.email}</span>}
-          {personalInfo?.phone && <span>📞 {personalInfo.phone}</span>}
-          {personalInfo?.location && <span>📍 {personalInfo.location}</span>}
-          {personalInfo?.linkedin && <span>🔗 {personalInfo.linkedin}</span>}
-          {personalInfo?.github && <span>💻 {personalInfo.github}</span>}
-          {personalInfo?.portfolio && <span>🌐 {personalInfo.portfolio}</span>}
+          {personalInfo?.email && <span>{personalInfo.email}</span>}
+          {personalInfo?.phone && <span>{personalInfo.phone}</span>}
+          {personalInfo?.location && <span>{personalInfo.location}</span>}
+          {personalInfo?.linkedin && <span>{personalInfo.linkedin}</span>}
+          {personalInfo?.github && <span>{personalInfo.github}</span>}
+          {personalInfo?.portfolio && <span>{personalInfo.portfolio}</span>}
         </div>
       </div>
 

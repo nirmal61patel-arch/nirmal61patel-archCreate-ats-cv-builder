@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id            String    @id @default(uuid())
+  name          String?
+  email         String    @unique
+  password      String
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  cvProfiles    CVProfile[]
+  generatedCVs  GeneratedCV[]
+}
+
+model CVProfile {
+  id            String    @id @default(uuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fullName      String
+  email         String
+  phone         String?
+  location      String?
+  linkedin      String?
+  portfolio     String?
+  summary       String?
+  skills        String    @default("[]") // JSON array of {category, items[]}
+  experience    String    @default("[]") // JSON array of {company, role, startDate, endDate, bullets[]}
+  education     String    @default("[]") // JSON array of {degree, institution, startDate, endDate, gpa}
+  certifications String   @default("[]") // JSON array of strings
+  projects      String    @default("[]") // JSON array of {name, description, tech[], link}
+  isDefault     Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  generatedCVs  GeneratedCV[]
+}
+
+model GeneratedCV {
+  id              String    @id @default(uuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cvProfileId     String
+  cvProfile       CVProfile @relation(fields: [cvProfileId], references: [id], onDelete: Cascade)
+  jobTitle        String
+  company         String
+  jobDescription  String
+  jobUrl          String?
+  tailoredCV      String    @default("{}") // JSON of tailored CV data
+  coverLetter     String?
+  atsScore        Int       @default(0)
+  atsBreakdown    String    @default("{}") // JSON of score breakdown
+  templateUsed    String    @default("modern")
+  createdAt       DateTime  @default(now())
+}
